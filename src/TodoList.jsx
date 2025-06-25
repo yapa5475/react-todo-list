@@ -4,8 +4,9 @@ export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo }) {
   return (
     <ul className="list">
       {todos.length === 0 && "No Todos"}
-      {todos.map(todo => {
-        return (
+      {[...todos]
+        .sort((a, b) => a.completed - b.completed)
+        .map(todo => (
           <TodoItem
             {...todo}
             key={todo.id}
@@ -13,8 +14,8 @@ export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo }) {
             deleteTodo={deleteTodo}
             duplicateTodo={duplicateTodo}
           />
-        )
-      })}
+        ))
+      }
     </ul>
   )
 }
