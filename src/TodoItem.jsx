@@ -1,4 +1,4 @@
-export function TodoItem({ completed, id, title, toggleTodo, deleteTodo }) {
+export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, duplicateTodo }) {
   return (
     <li>
       <label>
@@ -12,6 +12,10 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo }) {
       <button onClick={() => deleteTodo(id)} className="btn btn-danger">
         Delete
       </button>
+      <button onClick={() => duplicateTodo(title)} className="btn">
+         Duplicate
+      </button>
+
     </li>
   )
 }
