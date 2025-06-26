@@ -22,8 +22,7 @@ export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo, markAll
               key={todo.id}
               toggleTodo={toggleTodo}
               deleteTodo={deleteTodo}
-              duplicateTodo={duplicateTodo}
-            />
+              duplicateTodo={duplicateTodo} />
           ))}
       </ul>
     </>
