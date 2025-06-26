@@ -1,13 +1,14 @@
 # React Todo List project
 
-todo: think of enhancements and add
+A simple React app to keep track of what you need to get done
 
 ### How to run
 #### First Time:
 1. npm install (if not done)
-2. npm run dev
-3. open localhost url in console
 
+#### All times:
+1. npm run dev
+2. open localhost url in console
 
 ### Running tests
 1. npm install --save-dev vite vitest

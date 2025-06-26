@@ -2,12 +2,16 @@
   "name": "react-todo-list",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://yapa5475.github.io/react-todo-list",
+  "description": "A simple React Todo List application",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "react-scripts test --env=jsdom",
-    "debug-test": "node --inspect-brk ./node_modules/vitest/vitest.mjs"
+    "debug-test": "node --inspect-brk ./node_modules/vitest/vitest.mjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -20,6 +24,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "gh-pages": "^6.3.0",
     "jest": "^30.0.3",
     "vite": "^4.5.14",
     "vitest": "^3.2.4"
