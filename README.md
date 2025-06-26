@@ -13,4 +13,5 @@ A simple React app to keep track of what you need to get done
 ### Running tests
 1. npm install --save-dev vite vitest
 2. npm run test --debug
+3. once App.test.jsx runs, click 'a' to run all tests
 

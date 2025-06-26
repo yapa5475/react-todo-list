@@ -1,47 +1,53 @@
-import '@testing-library/jest-dom'  
-import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { TodoItem } from '../TodoItem'
 
-import { TodoItem } from "../TodoItem"
-import { useState } from "react"
-import { deleteTodo } from "../TodoItem"
+describe('TodoItem - Unit Tests', () => {
+  const baseProps = {
+    id: '123',
+    title: 'Walk the dog',
+    completed: false,
+    toggleTodo: jest.fn(),
+    deleteTodo: jest.fn(),
+    duplicateTodo: jest.fn()
+  }
 
-
-// Test wrapper to observe real UI changes
-function TodoItemTestWrapper({ title = "Test Todo", completed = false }) {
-debugger;
-  const [isChecked, setIsChecked] = useState(completed);
-  const [visible, setVisible] = useState(true);
-  
-  return (
-    <TodoItem
-      id="1"
-      title={title}
-      completed={isChecked}
-      toggleTodo={(id, value) => setIsChecked(value)}
-      deleteTodo={(value) => deleteTodo(value)}
-      duplicateTodo={() => {}}
-    />
-  )
-}
-
-describe("TodoItem - UI integration", () => {
-  console.log("Running TodoItem UI tests");
-
-  it("renders the todo item with correct title", () => {
-    render(<TodoItemTestWrapper title="Buy milk" />)
-    expect(screen.getByLabelText("Buy milk")).toBeInTheDocument()
+  beforeEach(() => {
+    jest.clearAllMocks()
   })
 
-  it("toggles checkbox and updates UI", () => {
-    render(<TodoItemTestWrapper />)
-    const checkbox = screen.getByRole("checkbox")
-    expect(checkbox.checked).toBe(false)
+  it('renders the correct title and checkbox state', () => {
+    render(<TodoItem {...baseProps} />)
 
-    fireEvent.click(checkbox)
-    expect(checkbox.checked).toBe(true)
+    const checkbox = screen.getByRole('checkbox')
+    const label = screen.getByLabelText('Walk the dog')
 
-    fireEvent.click(checkbox)
     expect(checkbox.checked).toBe(false)
+    expect(label).toBeInTheDocument()
   })
 
+  it('calls toggleTodo with correct args when checkbox is clicked', () => {
+    render(<TodoItem {...baseProps} />)
+
+    const checkbox = screen.getByRole('checkbox')
+    fireEvent.click(checkbox)
+
+    expect(baseProps.toggleTodo).toHaveBeenCalledWith('123', true)
+  })
+
+  it('calls deleteTodo with correct ID when Delete is clicked', () => {
+    render(<TodoItem {...baseProps} />)
+
+    fireEvent.click(screen.getByText('Delete'))
+
+    expect(baseProps.deleteTodo).toHaveBeenCalledWith('123')
+  })
+
+  it('calls duplicateTodo with correct title when Duplicate is clicked', () => {
+    render(<TodoItem {...baseProps} />)
+
+    fireEvent.click(screen.getByText('Duplicate'))
+
+    expect(baseProps.duplicateTodo).toHaveBeenCalledWith('Walk the dog')
+  })
 })
