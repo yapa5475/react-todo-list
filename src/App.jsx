@@ -51,11 +51,19 @@ export default function App() {
     })
   }
 
+  function markAllAsCompleted() {
+    setTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        return { ...todo, completed: true }
+      })
+    })
+  }
+
   return (
     <>
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} markAllAsCompleted={markAllAsCompleted} />
     </>
   )
 }

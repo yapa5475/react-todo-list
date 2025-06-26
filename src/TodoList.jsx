@@ -1,7 +1,11 @@
 import { TodoItem } from "./TodoItem"
 
-export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo }) {
+export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo, markAllAsCompleted }) {
   return (
+    <>
+    
+    <button className="btn" onClick={markAllAsCompleted}>Mark All as Completed</button>
+    
     <ul className="list">
       {todos.length === 0 && "No Todos"}
       {[...todos]
@@ -12,10 +16,8 @@ export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo }) {
             key={todo.id}
             toggleTodo={toggleTodo}
             deleteTodo={deleteTodo}
-            duplicateTodo={duplicateTodo}
-          />
-        ))
-      }
-    </ul>
+            duplicateTodo={duplicateTodo} />
+        ))}
+    </ul></>
   )
 }
