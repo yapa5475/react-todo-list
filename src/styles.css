@@ -138,3 +138,11 @@ body {
 .list li:has(input:checked) label:hover::before {
   background: hsl(200, 100%, 30%);
 }
+
+.todo-item .btn-hover {
+  display: none; /* hide buttons by default */
+}
+
+.todo-item:hover .btn-hover {
+  display: inline-block; /* show buttons on hover */
+}
