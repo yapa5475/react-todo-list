@@ -6,10 +6,13 @@
   "description": "A simple React Todo List application",
   "type": "module",
   "scripts": {
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
     "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "debug-test": "node --inspect-brk ./node_modules/vitest/vitest.mjs",
+    "cypress:open": "cypress open",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -24,6 +27,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "cypress": "^14.5.0",
     "gh-pages": "^6.3.0",
     "jest": "^30.0.3",
     "vite": "^4.5.14",

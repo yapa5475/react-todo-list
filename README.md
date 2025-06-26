@@ -15,3 +15,6 @@ A simple React app to keep track of what you need to get done
 2. npm run test --debug
 3. once App.test.jsx runs, click 'a' to run all tests
 
+### Running cypress tests:
+1. npm run cypress:open
+You can run tests headlessly with npx cypress run or open the GUI with npm run cypress:open.
