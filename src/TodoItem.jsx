@@ -1,6 +1,6 @@
 export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, duplicateTodo }) {
   return (
-    <li>
+    <li className="todo-item">
       <label>
         <input
           type="checkbox"
@@ -9,10 +9,10 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, duplica
         />
         {title}
       </label>
-      <button onClick={() => deleteTodo(id)} className="btn btn-danger">
+      <button onClick={() => deleteTodo(id)} className="btn btn-danger btn-hover">
         Delete
       </button>
-      <button onClick={() => duplicateTodo(title)} className="btn">
+      <button onClick={() => duplicateTodo(title)} className="btn btn-hover">
          Duplicate
       </button>
 
