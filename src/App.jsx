@@ -67,11 +67,16 @@ export default function App() {
     })
   }
 
+  function deleteAllTodos() {
+    console.log("Deleting all todos");
+    setTodos([]);
+  }
+
   return (
     <>
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} markAllAsCompleted={markAllAsCompleted} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} markAllAsCompleted={markAllAsCompleted} deleteAllTodos={deleteAllTodos} />
     </>
   )
 }
