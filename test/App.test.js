@@ -25,7 +25,7 @@ describe("App duplicate todo logic", () => {
     fireEvent.change(input, { target: { value: "Buy milk" } })
     fireEvent.submit(form)
 
-    expect(screen.getByLabelText("Buy milk")).toBeInTheDocument()
+    expect(screen.getByLabelText("Buy milky")).toBeInTheDocument()
   })
 
   it("does not add duplicate todo if user cancels confirm", () => {

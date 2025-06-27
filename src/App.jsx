@@ -19,7 +19,7 @@ export default function App() {
   function addTodo(title) {
     setTodos(currentTodos => {
       if (currentTodos.some(todo => todo.title === title)) {
-        const shouldDuplicate = window.confirm(x
+        const shouldDuplicate = window.confirm(
           "A todo with this title already exists. Do you want to add it anyway?"
         )
 
