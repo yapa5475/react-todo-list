@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,7 +27,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run unit tests with coverage
         run: npm test -- --coverage
 
