@@ -1,4 +1,5 @@
 import { TodoItem } from "./TodoItem"
+import React from 'react';
 
 export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo, markAllAsCompleted, deleteAllTodos }) {
   const hasTodos = todos.length > 0

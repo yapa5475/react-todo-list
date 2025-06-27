@@ -1,6 +1,14 @@
+import React from 'react';
 import { render, screen, fireEvent } from "@testing-library/react"
 import '@testing-library/jest-dom'
-import App from "../App"
+import App from "../src/App"
+
+beforeAll(() => {
+  if (!crypto.randomUUID) {
+    crypto.randomUUID = () => 'mock-uuid-1234';
+  }
+});
+
 
 global.crypto = {
   randomUUID: () => 'test-id',

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, duplicateTodo }) {
   return (
     <li className="todo-item">

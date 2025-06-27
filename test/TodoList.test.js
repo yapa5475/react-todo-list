@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react"
-import { TodoList } from "../TodoList"
-import '@testing-library/jest-dom'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { TodoList } from '../src/TodoList';
+import '@testing-library/jest-dom';
 
 describe("TodoList", () => {
   const baseProps = {
