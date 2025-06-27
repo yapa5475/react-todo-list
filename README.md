@@ -15,11 +15,14 @@ For simplicity sake, the first thing to try is `npm test` from the root folder. 
 
 1. `npm install --save-dev vite vitest`
 2. `npm run test --debug`
-3. may hve to also run `npm install --save-dev jest@29 jest-environment-jsdom@29`
+3. may have to also run 
+
+`npm install --save-dev jest@29 jest-environment-jsdom@29`
 
 4. may also have to install babel
+
 `npm install --save-dev @babel/preset-react`
+
 `npm install --save-dev @babel/core @babel/preset-env`
-3. once App.test.jsx runs, click 'a' to run all tests
 
 For code coverage, run `npm test --coverage`
