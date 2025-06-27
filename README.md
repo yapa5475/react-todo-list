@@ -21,3 +21,5 @@ For simplicity sake, the first thing to try is `npm test` from the root folder. 
 `npm install --save-dev @babel/preset-react`
 `npm install --save-dev @babel/core @babel/preset-env`
 3. once App.test.jsx runs, click 'a' to run all tests
+
+For code coverage, run `npm test --coverage`
