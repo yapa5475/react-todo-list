@@ -1,6 +1,7 @@
+import React from 'react';
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { TodoItem } from '../TodoItem'
+import { TodoItem } from '../src/TodoItem'
 
 describe('TodoItem - Unit Tests', () => {
   const baseProps = {
