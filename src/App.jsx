@@ -77,6 +77,7 @@ export default function App() {
     <>
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
+      <h2>hi</h2>
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} markAllAsCompleted={markAllAsCompleted} deleteAllTodos={deleteAllTodos} />
     </>
   )
