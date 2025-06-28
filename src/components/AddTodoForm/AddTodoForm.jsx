@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-// import styles from './AddTodoForm.module.css';
+import * as styles from '../../styles.css';
 
 export default function AddTodoForm({ onAdd }) {
   const [text, setText] = useState('');

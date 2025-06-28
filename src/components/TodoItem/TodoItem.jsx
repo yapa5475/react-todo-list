@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 // import styles from './TodoItem.module.css';
+import * as styles from '../../styles.css';
 
 export default function TodoItem({ todo, onToggle, onDelete }) {
   return (

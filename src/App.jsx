@@ -1,8 +1,10 @@
-// import { useTodos } from './hooks/useTodos';
+import { useTodos } from './hooks/useTodos';
 import AddTodoForm from './components/AddTodoForm/AddTodoForm'
 import TodoList from './components/TodoList/TodoList';
 // import Counter from './components/Counter/Counter';
-import './styles.css';
+import * as styles from './styles.css';
+// import styles as styles from './styles.css';
+
 
 function App() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodos();
