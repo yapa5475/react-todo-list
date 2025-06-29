@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { NewTodoForm } from "./NewTodoForm"
 import "./styles.css"
 import { TodoList } from "./TodoList"
-import React from 'react';
+import React from "react"
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -34,50 +34,62 @@ export default function App() {
   }
 
   function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed }
-        }
-
-        return todo
-      })
-    })
+    setTodos(currentTodos =>
+      currentTodos.map(todo =>
+        todo.id === id ? { ...todo, completed } : todo
+      )
+    )
   }
 
   function deleteTodo(id) {
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
+    setTodos(currentTodos => currentTodos.filter(todo => todo.id !== id))
   }
 
   function duplicateTodo(title) {
-    setTodos(currentTodos => {
-        return [
-            ...currentTodos,
-            { id: crypto.randomUUID(), title, completed: false },
-        ]
-    })
+    setTodos(currentTodos => [
+      ...currentTodos,
+      { id: crypto.randomUUID(), title, completed: false },
+    ])
   }
 
   function markAllAsCompleted() {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        return { ...todo, completed: true }
-      })
-    })
+    setTodos(currentTodos =>
+      currentTodos.map(todo => ({ ...todo, completed: true }))
+    )
   }
 
   function deleteAllTodos() {
-    console.log("Deleting all todos");
-    setTodos([]);
+    console.log("Deleting all todos")
+    setTodos([])
   }
 
   return (
     <>
       <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} duplicateTodo={duplicateTodo} markAllAsCompleted={markAllAsCompleted} deleteAllTodos={deleteAllTodos} />
+      <TodoList
+        todos={todos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        duplicateTodo={duplicateTodo}
+        markAllAsCompleted={markAllAsCompleted}
+        deleteAllTodos={deleteAllTodos}
+      />
       <NewTodoForm onSubmit={addTodo} />
+      <br />
+      <button
+        className="btn btn-hover"
+        onClick={() =>
+          setTodos([
+            {
+              id: crypto.randomUUID(),
+              title: "New Task",
+              completed: false,
+            },
+          ])
+        }
+      >
+        ➕ New Todo List
+      </button>
     </>
   )
 }
