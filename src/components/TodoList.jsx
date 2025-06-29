@@ -29,3 +29,5 @@ export function TodoList({ todos, toggleTodo, deleteTodo, duplicateTodo, markAll
     </>
   )
 }
+
+export default TodoList;

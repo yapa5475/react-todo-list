@@ -31,3 +31,5 @@ export function NewTodoForm({ onSubmit }) {
 NewTodoForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
+
+export default NewTodoForm;

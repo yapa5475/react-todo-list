@@ -9,8 +9,11 @@ export function Counter({ todos }) {
     </div>
   );
 }
+
 Counter.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({ completed: PropTypes.bool.isRequired })
   ).isRequired,
 };
+
+export default Counter;
