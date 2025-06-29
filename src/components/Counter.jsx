@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 export function Counter({ todos }) {
   const completedCount = todos.reduce((acc, todo) => acc + (todo.completed ? 1 : 0), 0);

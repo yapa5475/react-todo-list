@@ -2,7 +2,8 @@ import { useTodos } from "./hooks/useTodos";
 import NewTodoForm from "./components/NewTodoForm";
 import TodoList from "./components/TodoList";
 import Counter from "./components/Counter";
-// import "./App.css";
+import React from "react";
+import "./App.css";
 
 export default function App() {
   const {

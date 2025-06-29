@@ -25,11 +25,11 @@ export function useTodos() {
   }
 
   function duplicateTodo(id) {
-    setTodos(todos.flatMap(todo =>
-      todo.id === id
-        ? [todo, { ...todo, id: crypto.randomUUID() }]
-        : [todo]
-    ));
+    setTodos(currentTodos => 
+        currentTodos.flatMap(todo =>
+          todo.id === id ? [{ ...todo, id: crypto.randomUUID() }, todo] : [todo]
+        )
+    )
   }
 
   function markAllAsCompleted() {

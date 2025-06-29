@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { TodoList } from '../src/TodoList';
+import { TodoList } from '../src/components/TodoList';
 import '@testing-library/jest-dom';
 
 describe("TodoList", () => {
