@@ -22,7 +22,7 @@ describe("App Integration Test", () => {
 
   it("adds a new todo item and renders it", () => {
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
@@ -33,7 +33,7 @@ describe("App Integration Test", () => {
 
   it("toggles a todo item as completed", () => {
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
@@ -47,7 +47,7 @@ describe("App Integration Test", () => {
 
   it("deletes a todo item", () => {
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
@@ -64,7 +64,7 @@ describe("App Integration Test", () => {
 
   it("duplicates a todo item", () => {
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
@@ -78,7 +78,7 @@ describe("App Integration Test", () => {
 
   it("marks all todos as completed", () => {
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
@@ -98,7 +98,7 @@ describe("App Integration Test", () => {
 
   it("deletes all todos", () => { 
     render(<App />)
-    const input = screen.getByLabelText("New Item")   
+    const input = screen.getByLabelText("New item")   
     const form = input.closest("form")
 
     fireEvent.change(input, { target: { value: "Buy milk" } })
