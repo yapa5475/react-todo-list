@@ -1,11 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { TodoItem } from '../src/TodoItem'
+import { TodoItem } from '../src/components/TodoItem'
 
 describe('TodoItem - Unit Tests', () => {
   const baseProps = {
-    id: '123',
+    id: 'walk-the-dog',
     title: 'Walk the dog',
     completed: false,
     toggleTodo: jest.fn(),
@@ -33,7 +33,7 @@ describe('TodoItem - Unit Tests', () => {
     const checkbox = screen.getByRole('checkbox')
     fireEvent.click(checkbox)
 
-    expect(baseProps.toggleTodo).toHaveBeenCalledWith('123', true)
+    expect(baseProps.toggleTodo).toHaveBeenCalledWith('walk-the-dog', true)
   })
 
   it('calls deleteTodo with correct ID when Delete is clicked', () => {
@@ -41,7 +41,7 @@ describe('TodoItem - Unit Tests', () => {
 
     fireEvent.click(screen.getByText('Delete'))
 
-    expect(baseProps.deleteTodo).toHaveBeenCalledWith('123')
+    expect(baseProps.deleteTodo).toHaveBeenCalledWith('walk-the-dog')
   })
 
   it('calls duplicateTodo with correct title when Duplicate is clicked', () => {
@@ -49,6 +49,6 @@ describe('TodoItem - Unit Tests', () => {
 
     fireEvent.click(screen.getByText('Duplicate'))
 
-    expect(baseProps.duplicateTodo).toHaveBeenCalledWith('Walk the dog')
+    expect(baseProps.duplicateTodo).toHaveBeenCalledWith('walk-the-dog')
   })
 })

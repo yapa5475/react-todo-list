@@ -14,7 +14,7 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, duplica
       <button onClick={() => deleteTodo(id)} className="btn btn-danger btn-hover">
         Delete
       </button>
-      <button onClick={() => duplicateTodo(title)} className="btn btn-hover">
+      <button onClick={() => duplicateTodo(id)} className="btn btn-hover">
          Duplicate
       </button>
 
