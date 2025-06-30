@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent } from "@testing-library/react"
+import { render, screen, fireEvent, act } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import App from "../src/App"
+import { TestHookWrapper } from "./TestHookWrapper"
 
 describe("App duplicate todo logic", () => {
     beforeAll(() => {
@@ -39,5 +40,22 @@ describe("App duplicate todo logic", () => {
 
     expect(screen.queryByLabelText(" ")).not.toBeInTheDocument()
   })
- 
+
+  it("covers duplicateTodo branches", () => {
+    let todosHook;
+    render(<TestHookWrapper onReady={(hook) => { todosHook = hook }} />);
+
+    act(() => {
+      todosHook.addTodo("Test 1");
+    });
+
+    const existingId = todosHook.todos[0].id;
+
+    act(() => {
+      todosHook.duplicateTodo(existingId);
+      todosHook.duplicateTodo("non-existent-id");
+    });
+
+    expect(todosHook.todos.length).toBe(2);
+  });
 })
