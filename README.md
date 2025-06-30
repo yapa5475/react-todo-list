@@ -7,10 +7,12 @@ A simple React app to keep track of what you need to get done
 1. npm
 
 - `npm install` (if not already installled)
+- `npm install --save-dev concurrently`
 
-#### Running locally:
+#### Running app locally:
 1. `npm run dev`
-2. open localhost url outputted in console in browser
+- will start local app and server
+2. go to localhost link
 
 ### Running tests:
 For simplicity sake, the first thing to try is `npm test` from the root folder. If that doesn't work, here are some debugging steps that may be useful at first.

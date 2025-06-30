@@ -6,7 +6,9 @@
   "description": "A simple React Todo List application",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server\" \"npm run vite\"",
+    "vite": "vite",
+    "server": "json-server --watch db.json --port 3001",
     "build": "vite build",
     "test": "jest --coverage",
     "debug-test": "node --inspect-brk ./node_modules/vitest/vitest.mjs",
@@ -29,6 +31,7 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "babel-jest": "^30.0.2",
+    "concurrently": "^9.2.0",
     "gh-pages": "^6.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",

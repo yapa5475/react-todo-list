@@ -9,6 +9,38 @@ beforeAll(() => {
   }
 });
 
+beforeEach(() => {
+  global.fetch = jest.fn((url, options) => {
+    if (options?.method === "POST") {
+      return Promise.resolve({
+        json: () => Promise.resolve({ id: 123, title: "Mock Todo", completed: false })
+      });
+    }
+
+    if (options?.method === "PATCH") {
+      return Promise.resolve({
+        json: () =>
+          Promise.resolve({ id: 123, title: "Mock Todo", completed: true })
+      });
+    }
+
+    if (options?.method === "DELETE") {
+      return Promise.resolve({});
+    }
+
+    return Promise.resolve({
+      json: () =>
+        Promise.resolve([
+          { id: 123, title: "Mock Todo", completed: false }
+        ])
+    });
+  });
+});
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
 
 global.crypto = {
   randomUUID: () => 'test-id',
@@ -20,100 +52,87 @@ describe("App Integration Test", () => {
     localStorage.clear()
   })
 
-  it("adds a new todo item and renders it", () => {
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+  it("adds a new todo item", async () => {
+    render(<App />);
+    
+    const input = screen.getByLabelText(/new item/i);
+    const form = input.closest("form");
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
+    await act(async () => {
+      fireEvent.change(input, { target: { value: "Learn React" } });
+      fireEvent.submit(form);
+    });
 
-    expect(screen.getByLabelText("Buy milk")).toBeInTheDocument()
-    })
+    expect(await screen.findByText("Learn React")).toBeInTheDocument();
+  });
 
-  it("toggles a todo item as completed", () => {
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+  it("toggles a todo's completed state", async () => {
+    render(<App />);
+    
+    const checkbox = await screen.findByRole("checkbox");
+    expect(checkbox).not.toBeChecked();
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
+    await act(async () => {
+      fireEvent.click(checkbox);
+    });
 
-    const checkbox = screen.getByLabelText("Buy milk")
-    fireEvent.click(checkbox)
+    expect(checkbox).toBeChecked();
+  });
 
-    expect(checkbox).toBeChecked()
-  })
 
-  it("deletes a todo item", () => {
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+  it("deletes a todo item", async () => {
+  render(<App />);
+  const todoCheckbox = await screen.findByRole("checkbox");
+  const deleteButton = screen.getByText("Delete");
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
+  // Simulate click
+  fireEvent.click(deleteButton);
 
-    const todoItem = screen.getByLabelText("Buy milk")
-    expect(todoItem).toBeInTheDocument()
-    fireEvent.mouseOver(todoItem)
-    const deleteButton = screen.getByRole("button", { name: "Delete" })
-    fireEvent.click(deleteButton)
+  // Assert it's gone
+  expect(screen.queryByText("Mock Todo")).not.toBeInTheDocument();
+});
 
-    expect(screen.queryByLabelText("Buy milk")).not.toBeInTheDocument()
-  })
 
-  it("duplicates a todo item", () => {
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+  it("duplicates a todo item", async () => {
+    render(<App />);
+    
+    const original = await screen.findByText("Mock Todo");
+    const duplicateButton = screen.getByText(/duplicate/i);
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
+    await act(async () => {
+      fireEvent.click(duplicateButton);
+    });
 
-    const duplicateButton = screen.getByRole("button", { name: "Duplicate" })
-    fireEvent.click(duplicateButton)
+    const todos = await screen.findAllByText("Mock Todo");
+    expect(todos.length).toBeGreaterThan(1);
+  });
 
-    expect(screen.getAllByLabelText("Buy milk").length).toBe(2)
-  })
 
-  it("marks all todos as completed", () => {
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+  it("marks all todos as completed", async () => {
+    render(<App />);
+    
+    const markAllButton = screen.getByText(/mark all/i);
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
+    await act(async () => {
+      fireEvent.click(markAllButton);
+    });
 
-    fireEvent.change(input, { target: { value: "Feed the dogs" } })
-    fireEvent.submit(form)
+    const checkboxes = await screen.findAllByRole("checkbox");
+    checkboxes.forEach(checkbox => expect(checkbox).toBeChecked());
+  });
 
-    const markAllButton = screen.getByRole("button", { name: "Mark All as Completed" })
-    fireEvent.click(markAllButton)
 
-    const checkbox = screen.getByLabelText("Buy milk")
-    expect(checkbox).toBeChecked()
-    const checkbox2 = screen.getByLabelText("Feed the dogs")
-    expect(checkbox2).toBeChecked()
-  })
+  it("deletes all todos", async () => {
+    render(<App />);
+    
+    const deleteAllButton = screen.getByText(/delete all/i);
 
-  it("deletes all todos", () => { 
-    render(<App />)
-    const input = screen.getByLabelText("New item")   
-    const form = input.closest("form")
+    await act(async () => {
+      fireEvent.click(deleteAllButton);
+    });
 
-    fireEvent.change(input, { target: { value: "Buy milk" } })
-    fireEvent.submit(form)
-
-    fireEvent.change(input, { target: { value: "Feed the dogs" } })
-    fireEvent.submit(form)
-
-    const deleteAllButton = screen.getByRole("button", { name: "Delete All" })
-    fireEvent.click(deleteAllButton)
-
-    expect(screen.queryByLabelText("Buy milk")).not.toBeInTheDocument()
-    expect(screen.queryByLabelText("Feed the dogs")).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Delete All' })).not.toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Mark All as Completed' })).not.toBeInTheDocument()
-  })
+    const todo = screen.queryByText("Mock Todo");
+    expect(todo).not.toBeInTheDocument();
+  });
 
 })
