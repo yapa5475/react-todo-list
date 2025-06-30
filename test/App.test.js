@@ -27,4 +27,17 @@ describe("App duplicate todo logic", () => {
 
     expect(screen.getByLabelText("Buy milk")).toBeInTheDocument()
   })
+
+  it("does not add an empty todo", () => {
+    render(<App />)
+
+    const input = screen.getByLabelText("New item")
+    const form = input.closest("form")
+
+    fireEvent.change(input, { target: { value: " " } })
+    fireEvent.submit(form)
+
+    expect(screen.queryByLabelText(" ")).not.toBeInTheDocument()
+  })
+ 
 })
