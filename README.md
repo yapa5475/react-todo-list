@@ -1,6 +1,8 @@
 # React Todo List project
 
-A simple React app to keep track of what you need to get done
+A simple React app to keep track of what you need to get done.
+
+Live at: https://yapa5475.github.io/react-todo-list/
 
 ### How to run
 #### Prerequisite:
